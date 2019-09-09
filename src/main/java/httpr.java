@@ -15,9 +15,9 @@ public class httpr {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        //int responseCode = con.getResponseCode();
+        //System.out.println("\nSending 'GET' request to URL : " + url);
+        //System.out.println("Response Code : " + responseCode);
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -26,17 +26,19 @@ public class httpr {
             response.append(inputLine);
         }
         in.close();
-        //print in String
-        System.out.println(response.toString());
-        //Read JSON response and print rates
-        JSONObject myResponse = new JSONObject(response.toString());
-        System.out.println("result after Reading JSON Response");
-        System.out.println("Kurs z dnia| kupno |roznica|sprzedaz|roznica");
+        //print rates table
+        printTable(response.toString());
+
+
+    }
+
+    private static void printTable (String response) {
+        JSONObject myResponse = new JSONObject(response);
         double difa = 0;
         double difb = 0;
         DecimalFormat df = new DecimalFormat("#0.0000");
-        for(Object o:myResponse.getJSONArray("rates")) {
-            if(o instanceof JSONObject) {
+        for (Object o : myResponse.getJSONArray("rates")) {
+            if (o instanceof JSONObject) {
                 double ask = ((JSONObject) o).getDouble("ask");
                 double bid = ((JSONObject) o).getDouble("bid");
                 String s = "";
@@ -62,7 +64,5 @@ public class httpr {
 
             }
         }
-
     }
-
 }
