@@ -17,7 +17,7 @@ public class main {
                 check = dates.isDateValid(date);
                 if(!check)
                 {
-                    System.out.println("Błędny format daty lub zbyt odlegla");
+                    System.out.println("Bledny format daty lub zbyt odlegla");
                 }
             }
 
