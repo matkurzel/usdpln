@@ -1,4 +1,3 @@
-import java.util.Date;
 import java.util.Scanner;
 
 
@@ -25,10 +24,8 @@ public class main {
                 }
             }
 
-            Date today = new Date();
-            //call http request
-            httpr.call_me(date, dates.format(today));
 
+          httpr.call_me(date, dates.today());
         } catch (Exception e) {
             e.printStackTrace();
         }
