@@ -1,12 +1,10 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
 
 public class main {
 
-   public static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
 
         public static void main(String[] args) {
         try {
@@ -16,11 +14,11 @@ public class main {
             String date = "";
 
             //check date format, renew request if wrong
-            while(check == false) {
+            while(!check) {
                 Scanner scan = new Scanner(System.in);
                 date = scan.nextLine();
-                check = isDateValid(date);
-                if(check == false)
+                check = dates.isDateValid(date);
+                if(!check)
                 {
                     System.out.println("Błędny format daty");
                     System.out.println("Podaj date w formacie rrrr-mm-dd");
@@ -29,7 +27,7 @@ public class main {
 
             Date today = new Date();
             //call http request
-            httpr.call_me(date, df.format(today));
+            httpr.call_me(date, dates.format(today));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,16 +35,5 @@ public class main {
     }
 
 
-    //date format checker
-    public static boolean isDateValid(String date)
-    {
-     try {
-         df.setLenient(false);
-         df.parse(date);
-        return true;
-    } catch (Exception e) {
-        return false;
-    }
 
-    }
 }
