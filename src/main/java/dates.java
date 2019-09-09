@@ -9,6 +9,8 @@ public class dates {
 
     //check date format
     public static boolean isDateValid(String date) {
+        if(diff("2002-01-02", date)<0) return false;
+        if(diff(date, dates.today())<0) return false;
         try {
             LocalDate ld = LocalDate.parse(date, df);
             String result = ld.format(df);
@@ -40,6 +42,7 @@ public class dates {
         }
     }
 
+    //add days to a date
     public static String plus(String date, long days){
         LocalDate d = LocalDate.parse(date, df);
         d = d.plusDays(days);

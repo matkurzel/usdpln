@@ -10,6 +10,7 @@ public class httpr {
 
     public static void httpRequest(String date1, String date2){
         try {
+            //if the difference is higher than 93 (maximum period given by API docs), divide it and repeat the http request
             if (dates.diff(date1, date2) > 93) {
                 call_me(date1, dates.plus(date1, 93));
                 date1 = dates.plus(date1, 93);
@@ -22,6 +23,7 @@ public class httpr {
         }
     }
 
+    //call webapi to get a JSON file
     private static void call_me(String date1, String date2) throws Exception {
 
         String url = "http://api.nbp.pl/api/exchangerates/rates/c/usd/"+ date1 +"/"+ date2 +"/";
@@ -44,6 +46,7 @@ public class httpr {
 
     }
 
+    //print JSON as a table
     private static void printTable (String response) {
         JSONObject myResponse = new JSONObject(response);
         double difa = 0;
@@ -59,13 +62,13 @@ public class httpr {
                 sB.append(" |");
                 sB.append(df.format(ask));
                 sB.append(" |");
-                if (ask - difa > 0)
+                if (ask - difa >= 0)
                     sB.append("+");
                 sB.append(df.format(ask - difa));
                 sB.append("|");
                 sB.append(df.format(bid));
                 sB.append("  |");
-                if (bid - difb > 0)
+                if (bid - difb >= 0)
                     sB.append("+");
                 sB.append(df.format(bid - difb));
                 difa = ask;
