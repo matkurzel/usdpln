@@ -40,4 +40,10 @@ public class dates {
         }
     }
 
+    public static String plus(String date, long days){
+        LocalDate d = LocalDate.parse(date, df);
+        d = d.plusDays(days);
+        return format(d);
+    }
+
 }

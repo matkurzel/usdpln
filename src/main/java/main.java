@@ -11,9 +11,9 @@ public class main {
             Boolean check = false;
             String date = "";
 
-            //check date format, renew request if wron  g
-            while(!check) {
-                System.out.println("Podaj date w formacie rrrr-mm-dd (maks )");
+            //check date format, renew request if wrong
+            while(!check || dates.diff(date, dates.today())<0) {
+                System.out.println("Podaj date w formacie rrrr-mm-dd");
                 Scanner scan = new Scanner(System.in);
                 date = scan.nextLine();
                 check = dates.isDateValid(date);
@@ -24,7 +24,7 @@ public class main {
             }
 
             System.out.println("Kurs z dnia| kupno |roznica|sprzedaz|roznica");
-            httpr.call_me(date, dates.today());
+            httpr.httpRequest(date, dates.today());
 
 
         } catch (Exception e) {

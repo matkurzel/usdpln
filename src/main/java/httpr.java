@@ -8,16 +8,27 @@ import java.text.DecimalFormat;
 
 public class httpr {
 
-    public static void call_me(String date1, String date2) throws Exception {
+    public static void httpRequest(String date1, String date2){
+        try {
+            if (dates.diff(date1, date2) > 93) {
+                call_me(date1, dates.plus(date1, 93));
+                date1 = dates.plus(date1, 93);
+                httpRequest(date1, date2);
+            } else {
+                call_me(date1, date2);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void call_me(String date1, String date2) throws Exception {
 
         String url = "http://api.nbp.pl/api/exchangerates/rates/c/usd/"+ date1 +"/"+ date2 +"/";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
-        //int responseCode = con.getResponseCode();
-        //System.out.println("\nSending 'GET' request to URL : " + url);
-        //System.out.println("Response Code : " + responseCode);
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -26,6 +37,7 @@ public class httpr {
             response.append(inputLine);
         }
         in.close();
+
         //print rates table
         printTable(response.toString());
 
