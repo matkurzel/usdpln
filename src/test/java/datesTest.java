@@ -8,6 +8,9 @@ public class datesTest {
     @Test
     public void isDateValidTest(){
         assertTrue(dates.isDateValid("2019-08-11"));
+        assertFalse(dates.isDateValid("2017-08-32"));
+        assertFalse(dates.isDateValid("2020-03-01"));
+        assertFalse(dates.isDateValid("2001-01-12"));
     }
 
     @Test

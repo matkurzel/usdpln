@@ -22,6 +22,8 @@ public class main {
             }
 
             System.out.println("Kurs z dnia| kupno |roznica|sprzedaz|roznica");
+
+            //print tables from given dates
             httpr.httpRequest(date, dates.today());
 
 

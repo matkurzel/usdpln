@@ -52,12 +52,14 @@ public class httpr {
         double difa = 0;
         double difb = 0;
         DecimalFormat df = new DecimalFormat("#0.0000");
+
         for (Object o : myResponse.getJSONArray("rates")) {
             if (o instanceof JSONObject) {
                 double ask = ((JSONObject) o).getDouble("ask");
                 double bid = ((JSONObject) o).getDouble("bid");
                 String s = "";
                 StringBuilder sB = new StringBuilder(s);
+
                 sB.append(((JSONObject) o).getString("effectiveDate"));
                 sB.append(" |");
                 sB.append(df.format(ask));
@@ -74,6 +76,7 @@ public class httpr {
                 difa = ask;
                 difb = bid;
                 s = sB.toString();
+
                 System.out.println(s);
 
 
